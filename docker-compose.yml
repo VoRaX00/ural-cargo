@@ -1,0 +1,32 @@
+services:
+  db-postgres:
+    image: 'postgres:latest'
+    container_name: 'db-postgres'
+    environment:
+      - POSTGRES_USER=ural
+      - POSTGRES_PASSWORD=ural
+      - POSTGRES_DB=ural
+    ports:
+      - 5432:5432
+
+  redis:
+    image: 'redis:latest'
+    container_name: 'redis'
+    ports:
+      - 6379:6379
+
+  rabbitmq:
+    container_name: 'rabbitmq'
+    image: 'rabbitmq:3.13.7-management'
+    environment:
+      - RABBITMQ_DEFAULT_USER=ural
+      - RABBITMQ_DEFAULT_PASS=ural
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 25672:15672
+      - 5672:5672
