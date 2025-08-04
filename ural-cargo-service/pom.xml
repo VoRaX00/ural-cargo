@@ -24,6 +24,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.VoRaX00.ural-auth</groupId>
+            <artifactId>ural-auth-starter</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.VoRaX00.ural-common-starter</groupId>
             <artifactId>ural-exception-starter</artifactId>
             <version>1.0.8</version>

@@ -1,0 +1,2 @@
+ALTER SEQUENCE cargo_id_seq INCREMENT BY 50;
+ALTER SEQUENCE cargo_types_id_seq INCREMENT BY 50;
