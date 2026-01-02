@@ -12,4 +12,50 @@
         </sql>
     </changeSet>
 
+    <changeSet id="create table cargo" author="kerzhakov">
+        <createTable tableName="cargo">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="cargo_type" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cargo_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="length" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="height" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="width" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weight" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="volume" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="loading_place" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unloading_place" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment" type="text"/>
+            <column name="user_uuid" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamptz"/>
+         </createTable>
+    </changeSet>
+
 </databaseChangeLog>
