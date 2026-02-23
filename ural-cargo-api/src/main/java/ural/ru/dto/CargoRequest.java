@@ -31,17 +31,9 @@ public class CargoRequest {
     private BigDecimal weight;
 
     @NotNull
-    @Pattern(
-        regexp = "^[а-яА-ЯёЁ]+$",
-        message = "Название места загрузки состоит только из букв кириллицы"
-    )
     private String loadingPlace;
 
     @NotNull
-    @Pattern(
-        regexp = "^[а-яА-ЯёЁ]+$",
-        message = "Название места разгрузки состоит только из букв кириллицы"
-    )
     private String unloadingPlace;
 
     @NotNull

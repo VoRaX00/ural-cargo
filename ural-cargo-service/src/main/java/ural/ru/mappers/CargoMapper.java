@@ -5,12 +5,16 @@ import ural.ru.dto.CargoRequest;
 import ural.ru.dto.CargoResponse;
 import ural.ru.entities.Cargo;
 
+import java.util.List;
+
 @Mapper(
     componentModel = MappingConstants.ComponentModel.SPRING
 )
 public interface CargoMapper {
 
     CargoResponse toDto(Cargo cargo);
+
+    List<CargoResponse> toDto(List<Cargo> cargos);
 
     Cargo toEntity(CargoRequest request);
 
