@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import ural.ru.enums.CargoType;
 
 @Entity
@@ -35,10 +37,12 @@ public class Cargo extends BaseEntity {
     private BigDecimal weight;
 
     @Column(nullable = false)
-    private String loadingPlace;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Address loadingPlace;
 
     @Column(nullable = false)
-    private String unloadingPlace;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Address unloadingPlace;
 
     @Column(nullable = false)
     private BigDecimal price;

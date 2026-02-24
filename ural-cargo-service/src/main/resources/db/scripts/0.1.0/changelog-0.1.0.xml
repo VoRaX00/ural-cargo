@@ -57,5 +57,10 @@
             <column name="updated_at" type="timestamptz"/>
          </createTable>
     </changeSet>
+    
+    <changeSet id="edit type for columns loading_place and unloading_place" author="kerzhakov">
+        <modifyDataType tableName="cargo" columnName="loading_place" newDataType="jsonb"/>
+        <modifyDataType tableName="cargo" columnName="unloading_place" newDataType="jsonb"/>
+    </changeSet>
 
 </databaseChangeLog>

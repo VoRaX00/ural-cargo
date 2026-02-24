@@ -29,9 +29,9 @@ public class CargoResponse {
 
     private String phoneNumber;
 
-    private String loadingPlace;
+    private AddressDto loadingPlace;
 
-    private String unloadingPlace;
+    private AddressDto unloadingPlace;
 
     private BigDecimal price;
 

@@ -39,11 +39,11 @@ public class CargoRequest {
 
     @NotNull
     @Schema(description = "Место загрузки")
-    private String loadingPlace;
+    private AddressDto loadingPlace;
 
     @NotNull
     @Schema(description = "Место разгрузки")
-    private String unloadingPlace;
+    private AddressDto unloadingPlace;
 
     @NotNull
     @Schema(description = "Желаемая стоимость")

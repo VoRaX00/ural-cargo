@@ -8,7 +8,8 @@ import ural.ru.entities.Cargo;
 import java.util.List;
 
 @Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING
+    componentModel = MappingConstants.ComponentModel.SPRING,
+    uses = AddressMapper.class
 )
 public interface CargoMapper {
 
