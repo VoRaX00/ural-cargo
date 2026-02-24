@@ -23,7 +23,7 @@
 
     <properties>
         <java.version>21</java.version>
-        <ural-common-starter.version>1.3-SNAPSHOT</ural-common-starter.version>
+        <ural-common-starter.version>1.5-SNAPSHOT</ural-common-starter.version>
         <spring-boot.version>3.4.3</spring-boot.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
@@ -31,21 +31,51 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <lombok.mapstruct.binding.version>0.2.0</lombok.mapstruct.binding.version>
+        <springdoc.version>2.6.0</springdoc.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <!--URAL dependencies-->
             <dependency>
-                <groupId>ural</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ural-db-starter</artifactId>
                 <version>${ural-common-starter.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>ural</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>ural-api-starter</artifactId>
                 <version>${ural-common-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>ural-exception-starter</artifactId>
+                <version>${ural-common-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>ural-test-starter</artifactId>
+                <version>${ural-common-starter.version}</version>
+            </dependency>
+
+            <!--Child dependencies-->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>ural-cargo-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>ural-cargo-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>ural-cargo-db</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <!--Other dependencies-->
@@ -53,6 +83,16 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -135,25 +175,14 @@
                         </goals>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.puppycrawl.tools</groupId>
-                        <artifactId>checkstyle</artifactId>
-                        <version>10.3</version>
-                    </dependency>
-                </dependencies>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
+                    <sourceDirectories>
+                        <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+                    </sourceDirectories>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
 
 </project>

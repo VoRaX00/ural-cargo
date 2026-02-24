@@ -6,7 +6,6 @@ import org.springframework.boot.test.context.*;
 import org.springframework.boot.test.web.client.*;
 import org.springframework.boot.test.web.server.*;
 import org.springframework.boot.web.client.*;
-import ural.*;
 
 import org.junit.jupiter.api.*;
 import ural.ru.repositories.CargoRepository;

@@ -5,10 +5,12 @@ import java.util.UUID;
 
 import lombok.*;
 import org.springframework.stereotype.*;
-import ural.ru.entities.Cargo;
+import org.springframework.transaction.annotation.Transactional;
+import ural.ru.dto.*;
 import ural.ru.enums.CargoType;
-import ural.ru.models.PageModel;
-import ural.ru.models.PaginatedParamsModel;
+import ural.ru.exceptions.NotFoundException;
+import ural.ru.mappers.CargoMapper;
+import ural.ru.mappers.PaginatedMapper;
 import ural.ru.repositories.CargoRepository;
 import ural.ru.repositories.CustomCargoRepository;
 
@@ -17,30 +19,49 @@ import ural.ru.repositories.CustomCargoRepository;
 public class CargoService  {
 
     private final CargoRepository cargoRepository;
+
     private final CustomCargoRepository customCargoRepository;
 
-    public Cargo create(Cargo cargo, String userUuid) {
+    private final PaginatedMapper paginatedMapper;
+
+    private final CargoMapper cargoMapper;
+
+    public CargoResponse create(CargoRequest cargoRequest, String userUuid) {
+        var cargo = cargoMapper.toEntity(cargoRequest);
         cargo.setCargoType(CargoType.SEARCH);
         cargo.setCreatedAt(ZonedDateTime.now());
         cargo.setUserUuid(UUID.fromString(userUuid));
-        return cargoRepository.save(cargo);
+
+        var savedCargo = cargoRepository.save(cargo);
+        return cargoMapper.toDto(savedCargo);
     }
 
-    public PageModel<Cargo> getPage(PaginatedParamsModel paramsModel) {
-        var items = customCargoRepository.getItems(paramsModel);;
+    public PageDto<CargoResponse> getPage(PaginatedParamsDto paramsDto) {
+        var paramsModel = paginatedMapper.toModel(paramsDto);
+        var items = customCargoRepository.getItems(paramsModel);
         int totalResultCount = customCargoRepository.getTotalResultCount(paramsModel.getFilters());
         int totalPageCount = totalResultCount % paramsModel.getItemsOnPage() == 0
                 ? totalResultCount / paramsModel.getItemsOnPage()
                 : totalResultCount / paramsModel.getItemsOnPage() + 1;
 
-        return new PageModel<>(
+        return new PageDto<>(
                 paramsModel.getCurrentPageNumber(),
                 totalPageCount,
                 totalResultCount,
-                items,
+                cargoMapper.toDto(items),
                 paramsModel.getItemsOnPage()
         );
     }
 
+    @Transactional
+    public void update(Long id, CargoRequest cargoRequest, UserPrincipals userPrincipals) {
+        var cargoFromDb = cargoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format(
+                        "Cargo not found by id: %d",
+                        id
+                )));
+
+        cargoMapper.mapCargoDtoToEntity(cargoFromDb, cargoRequest);
+    }
 
 }

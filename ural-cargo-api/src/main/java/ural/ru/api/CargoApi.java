@@ -13,12 +13,19 @@ import ural.ru.dto.PaginatedParamsDto;
 import ural.ru.dto.UserPrincipals;
 
 @Validated
-@RequestMapping("/api/cargo/")
+@RequestMapping("/api/cargo")
 @Tag(name = "Cargo api", description = "API грузов платформы BACAR")
 public interface CargoApi {
 
     @PostMapping
     ResponseEntity<CargoResponse> create(
+            @RequestBody @Valid CargoRequest cargoRequest,
+            @RequestPrincipals UserPrincipals userInfo
+    );
+
+    @PutMapping("/{id}")
+    ResponseEntity<Void> update(
+            @PathVariable Long id,
             @RequestBody @Valid CargoRequest cargoRequest,
             @RequestPrincipals UserPrincipals userInfo
     );

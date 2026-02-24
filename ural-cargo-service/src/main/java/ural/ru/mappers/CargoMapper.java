@@ -16,6 +16,9 @@ public interface CargoMapper {
 
     List<CargoResponse> toDto(List<Cargo> cargos);
 
+    @Mapping(target = "cargoType", expression = "java(CargoType.valueOf(request.getCargoType()))")
     Cargo toEntity(CargoRequest request);
+
+    void mapCargoDtoToEntity(@MappingTarget Cargo cargo, CargoRequest cargoRequest);
 
 }

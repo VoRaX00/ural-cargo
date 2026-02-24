@@ -14,11 +14,7 @@ import ural.ru.enums.CargoType;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cargo {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Cargo extends BaseEntity {
 
     @Column(nullable = false)
     private String cargoName;
