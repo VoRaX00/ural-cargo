@@ -1,6 +1,7 @@
 package ural.ru.services;
 
 import java.time.*;
+import java.util.Objects;
 import java.util.UUID;
 
 import lombok.*;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
 import ural.ru.dto.*;
 import ural.ru.enums.CargoType;
+import ural.ru.exceptions.BadRequestException;
 import ural.ru.exceptions.NotFoundException;
 import ural.ru.mappers.CargoMapper;
 import ural.ru.mappers.PaginatedMapper;
@@ -61,7 +63,26 @@ public class CargoService  {
                         id
                 )));
 
+        if (!Objects.equals(cargoFromDb.getUserUuid().toString(), userPrincipals.getUuid())) {
+            throw new BadRequestException("Only maintainer can update cargo");
+        }
+
         cargoMapper.mapCargoDtoToEntity(cargoFromDb, cargoRequest);
+    }
+
+    @Transactional
+    public void delete(Long id, UserPrincipals userPrincipals) {
+        var cargoFromDb = cargoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format(
+                        "Cargo not found by id: %d",
+                        id
+                )));
+
+        if (!Objects.equals(cargoFromDb.getUserUuid().toString(), userPrincipals.getUuid())) {
+            throw new BadRequestException("Only maintainer can delete cargo");
+        }
+
+        cargoRepository.deleteById(id);
     }
 
 }

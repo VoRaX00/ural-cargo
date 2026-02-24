@@ -28,8 +28,20 @@ public class CargoController implements CargoApi {
     }
 
     @Override
+    public ResponseEntity<Void> update(Long id, CargoRequest cargoRequest, UserPrincipals userPrincipals) {
+        cargoService.update(id, cargoRequest, userPrincipals);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
     public ResponseEntity<PageDto<CargoResponse>> getPaginatedList(PaginatedParamsDto paramsDto) {
         return ResponseEntity.ok(cargoService.getPage(paramsDto));
+    }
+
+    @Override
+    public ResponseEntity<Void> delete(Long id, UserPrincipals userInfo) {
+        cargoService.delete(id, userInfo);
+        return ResponseEntity.ok().build();
     }
 
 }

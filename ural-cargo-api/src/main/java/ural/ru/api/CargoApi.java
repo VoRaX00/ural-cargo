@@ -33,4 +33,7 @@ public interface CargoApi {
     @GetMapping
     ResponseEntity<PageDto<CargoResponse>> getPaginatedList(@RequestParam PaginatedParamsDto paginatedParamsDto);
 
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> delete(@PathVariable Long id, @RequestPrincipals UserPrincipals userInfo);
+
 }
