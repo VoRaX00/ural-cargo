@@ -5,17 +5,25 @@ import java.util.Objects;
 import java.util.UUID;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
 import ural.ru.dto.*;
 import ural.ru.enums.CargoType;
+import ural.ru.enums.UserRole;
 import ural.ru.exceptions.BadRequestException;
 import ural.ru.exceptions.NotFoundException;
 import ural.ru.mappers.CargoMapper;
 import ural.ru.mappers.PaginatedMapper;
+import ural.ru.models.UserPrincipals;
 import ural.ru.repositories.CargoRepository;
 import ural.ru.repositories.CustomCargoRepository;
+import ural.ru.utils.JwtUtils;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CargoService  {
@@ -28,11 +36,13 @@ public class CargoService  {
 
     private final CargoMapper cargoMapper;
 
-    public CargoResponse create(CargoRequest cargoRequest, String userUuid) {
+    public CargoResponse create(@NonNull CargoRequest cargoRequest, @Nullable Authentication authentication) {
         var cargo = cargoMapper.toEntity(cargoRequest);
         cargo.setCargoType(CargoType.SEARCH);
         cargo.setCreatedAt(ZonedDateTime.now());
-        cargo.setUserUuid(UUID.fromString(userUuid));
+
+        UserPrincipals user = JwtUtils.getUser(authentication);
+        cargo.setUserUuid(UUID.fromString(user.getUuid()));
 
         var savedCargo = cargoRepository.save(cargo);
         return cargoMapper.toDto(savedCargo);
@@ -56,14 +66,19 @@ public class CargoService  {
     }
 
     @Transactional
-    public void update(Long id, CargoRequest cargoRequest, UserPrincipals userPrincipals) {
+    public void update(
+            @NonNull Long id,
+            @NonNull CargoRequest cargoRequest,
+            @Nullable Authentication authentication
+    ) {
         var cargoFromDb = cargoRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format(
                         "Cargo not found by id: %d",
                         id
                 )));
 
-        if (!Objects.equals(cargoFromDb.getUserUuid().toString(), userPrincipals.getUuid())) {
+        UserPrincipals user = JwtUtils.getUser(authentication);
+        if (!Objects.equals(cargoFromDb.getUserUuid().toString(), user.getUuid())) {
             throw new BadRequestException("Only maintainer can update cargo");
         }
 
@@ -71,14 +86,16 @@ public class CargoService  {
     }
 
     @Transactional
-    public void delete(Long id, UserPrincipals userPrincipals) {
+    public void delete(Long id, Authentication authentication) {
         var cargoFromDb = cargoRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format(
                         "Cargo not found by id: %d",
                         id
                 )));
 
-        if (!Objects.equals(cargoFromDb.getUserUuid().toString(), userPrincipals.getUuid())) {
+        UserPrincipals user = JwtUtils.getUser(authentication);
+        if (!Objects.equals(cargoFromDb.getUserUuid().toString(), user.getUuid())
+                && !user.getRoles().contains(UserRole.ADMIN)) {
             throw new BadRequestException("Only maintainer can delete cargo");
         }
 

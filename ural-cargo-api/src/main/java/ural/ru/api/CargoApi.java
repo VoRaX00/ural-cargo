@@ -3,6 +3,7 @@ package ural.ru.api;
 import io.swagger.v3.oas.annotations.tags.*;
 import jakarta.validation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ural.ru.annotations.RequestPrincipals;
@@ -20,20 +21,20 @@ public interface CargoApi {
     @PostMapping
     ResponseEntity<CargoResponse> create(
             @RequestBody @Valid CargoRequest cargoRequest,
-            @RequestPrincipals UserPrincipals userInfo
+            Authentication authentication
     );
 
     @PutMapping("/{id}")
     ResponseEntity<Void> update(
             @PathVariable Long id,
             @RequestBody @Valid CargoRequest cargoRequest,
-            @RequestPrincipals UserPrincipals userInfo
+            Authentication authentication
     );
 
     @GetMapping
     ResponseEntity<PageDto<CargoResponse>> getPaginatedList(@RequestParam PaginatedParamsDto paginatedParamsDto);
 
     @DeleteMapping("/{id}")
-    ResponseEntity<Void> delete(@PathVariable Long id, @RequestPrincipals UserPrincipals userInfo);
+    ResponseEntity<Void> delete(@PathVariable Long id, Authentication authentication);
 
 }

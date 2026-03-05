@@ -2,6 +2,7 @@ package ural.ru.controllers;
 
 import lombok.*;
 import org.springframework.http.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ural.ru.api.CargoApi;
 import ural.ru.dto.*;
@@ -16,14 +17,14 @@ public class CargoController implements CargoApi {
     @Override
     public ResponseEntity<CargoResponse> create(
             CargoRequest cargoRequest,
-            UserPrincipals userPrincipals
+            Authentication authentication
     ) {
-        return new ResponseEntity<>(cargoService.create(cargoRequest, userPrincipals.getUuid()), HttpStatus.CREATED);
+        return new ResponseEntity<>(cargoService.create(cargoRequest, authentication), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<Void> update(Long id, CargoRequest cargoRequest, UserPrincipals userPrincipals) {
-        cargoService.update(id, cargoRequest, userPrincipals);
+    public ResponseEntity<Void> update(Long id, CargoRequest cargoRequest, Authentication authentication) {
+        cargoService.update(id, cargoRequest, authentication);
         return ResponseEntity.ok().build();
     }
 
@@ -33,8 +34,8 @@ public class CargoController implements CargoApi {
     }
 
     @Override
-    public ResponseEntity<Void> delete(Long id, UserPrincipals userInfo) {
-        cargoService.delete(id, userInfo);
+    public ResponseEntity<Void> delete(Long id, Authentication authentication) {
+        cargoService.delete(id, authentication);
         return ResponseEntity.ok().build();
     }
 

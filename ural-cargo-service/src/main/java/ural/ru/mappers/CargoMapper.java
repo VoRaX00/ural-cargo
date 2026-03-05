@@ -13,6 +13,8 @@ import java.util.List;
 )
 public interface CargoMapper {
 
+    @Mapping(target = "name", source = "cargoName")
+    @Mapping(target = "type", source = "cargoType")
     CargoResponse toDto(Cargo cargo);
 
     List<CargoResponse> toDto(List<Cargo> cargos);

@@ -27,8 +27,6 @@ public class CargoResponse {
 
     private BigDecimal weight;
 
-    private String phoneNumber;
-
     private AddressDto loadingPlace;
 
     private AddressDto unloadingPlace;
