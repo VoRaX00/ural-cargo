@@ -21,7 +21,6 @@
         <dependency>
             <groupId>ural</groupId>
             <artifactId>ural-api-starter</artifactId>
-            <version>${ural-common-starter.version}</version>
         </dependency>
 
         <!--Other dependencies-->
