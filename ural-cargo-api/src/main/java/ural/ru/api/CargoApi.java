@@ -6,12 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ural.ru.annotations.RequestPrincipals;
 import ural.ru.dto.CargoRequest;
 import ural.ru.dto.CargoResponse;
 import ural.ru.dto.PageDto;
 import ural.ru.dto.PaginatedParamsDto;
-import ural.ru.dto.UserPrincipals;
 
 @Validated
 @RequestMapping("/api/cargo")

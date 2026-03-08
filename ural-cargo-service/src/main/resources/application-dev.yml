@@ -29,6 +29,10 @@ spring:
     change-log: classpath:db/changelog-master.xml
     default-schema: ural_cargo
 
+security:
+  jwt:
+    custom-decoder: true
+
 logging:
   level:
     root: info
