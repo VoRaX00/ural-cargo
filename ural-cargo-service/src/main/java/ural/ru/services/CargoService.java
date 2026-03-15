@@ -2,7 +2,6 @@ package ural.ru.services;
 
 import java.time.*;
 import java.util.Objects;
-import java.util.UUID;
 
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -13,15 +12,15 @@ import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
 import ural.ru.dto.*;
 import ural.ru.enums.CargoType;
-import ural.ru.enums.UserRole;
+import ru.ural.enums.UserRole;
 import ural.ru.exceptions.BadRequestException;
 import ural.ru.exceptions.NotFoundException;
 import ural.ru.mappers.CargoMapper;
 import ural.ru.mappers.PaginatedMapper;
-import ural.ru.models.UserPrincipals;
+import ru.ural.models.UserPrincipals;
 import ural.ru.repositories.CargoRepository;
 import ural.ru.repositories.CustomCargoRepository;
-import ural.ru.utils.JwtUtils;
+import ru.ural.utils.JwtUtils;
 
 @Slf4j
 @Service
@@ -42,7 +41,7 @@ public class CargoService  {
         cargo.setCreatedAt(ZonedDateTime.now());
 
         UserPrincipals user = JwtUtils.getUser(authentication);
-        cargo.setUserUuid(UUID.fromString(user.getUuid()));
+        cargo.setUserId(user.getId());
 
         var savedCargo = cargoRepository.save(cargo);
         return cargoMapper.toDto(savedCargo);
@@ -78,7 +77,7 @@ public class CargoService  {
                 )));
 
         UserPrincipals user = JwtUtils.getUser(authentication);
-        if (!Objects.equals(cargoFromDb.getUserUuid().toString(), user.getUuid())) {
+        if (!Objects.equals(cargoFromDb.getUserId(), user.getId())) {
             throw new BadRequestException("Only maintainer can update cargo");
         }
 
@@ -94,7 +93,7 @@ public class CargoService  {
                 )));
 
         UserPrincipals user = JwtUtils.getUser(authentication);
-        if (!Objects.equals(cargoFromDb.getUserUuid().toString(), user.getUuid())
+        if (!Objects.equals(cargoFromDb.getUserId(), user.getId())
                 && !user.getRoles().contains(UserRole.ADMIN)) {
             throw new BadRequestException("Only maintainer can delete cargo");
         }

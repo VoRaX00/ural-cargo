@@ -14,7 +14,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import ural.ru.filters.ExceptionFilterHandler;
+import ru.ural.configs.AllowedUrls;
+import ru.ural.filters.ExceptionFilterHandler;
 
 @Slf4j
 @Configuration

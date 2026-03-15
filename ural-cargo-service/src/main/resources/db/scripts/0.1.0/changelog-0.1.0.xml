@@ -63,4 +63,13 @@
         <modifyDataType tableName="cargo" columnName="unloading_place" newDataType="jsonb"/>
     </changeSet>
 
+    <changeSet id="change column userUuid on userId" author="kerzhakov">
+        <dropColumn tableName="cargo" columnName="user_uuid"/>
+        <addColumn tableName="cargo">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

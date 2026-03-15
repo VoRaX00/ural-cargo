@@ -2,7 +2,6 @@ package ural.ru.entities;
 
 import java.math.*;
 import java.time.*;
-import java.util.UUID;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -51,7 +50,7 @@ public class Cargo extends BaseEntity {
     private String comment;
 
     @Column(nullable = false)
-    private UUID userUuid;
+    private Long userId;
 
     @Column(nullable = false)
     private ZonedDateTime createdAt;

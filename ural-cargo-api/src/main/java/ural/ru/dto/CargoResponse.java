@@ -13,7 +13,7 @@ public class CargoResponse {
 
     private Long id;
 
-    private String userUuid;
+    private Long userId;
 
     private String name;
 
