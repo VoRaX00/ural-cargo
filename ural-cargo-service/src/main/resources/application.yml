@@ -27,10 +27,6 @@ spring:
     database-change-log-lock-table: ural_cargo_lock
     change-log: classpath:db/changelog.yaml
 
-security:
-  jwt:
-    custom-decoder: true
-
 logging:
   level:
     root: ${LOGGING_LEVEL_ROOT}

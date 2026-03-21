@@ -48,7 +48,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="comment" type="text"/>
-            <column name="user_uuid" type="uuid">
+            <column name="user_uuid" type="text">
                 <constraints nullable="false"/>
             </column>
             <column name="created_at" type="timestamptz">
@@ -61,15 +61,6 @@
     <changeSet id="edit type for columns loading_place and unloading_place" author="kerzhakov">
         <modifyDataType tableName="cargo" columnName="loading_place" newDataType="jsonb"/>
         <modifyDataType tableName="cargo" columnName="unloading_place" newDataType="jsonb"/>
-    </changeSet>
-
-    <changeSet id="change column userUuid on userId" author="kerzhakov">
-        <dropColumn tableName="cargo" columnName="user_uuid"/>
-        <addColumn tableName="cargo">
-            <column name="user_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-        </addColumn>
     </changeSet>
 
 </databaseChangeLog>
