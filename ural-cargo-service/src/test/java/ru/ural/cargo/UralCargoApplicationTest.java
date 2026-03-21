@@ -1,11 +1,9 @@
 package ru.ural.cargo;
 
-import org.springframework.boot.test.context.*;
-
 import org.junit.jupiter.api.*;
+import ru.ural.AbstractIntegrationTest;
 
-@SpringBootTest
-public class UralCargoApplicationTest {
+public class UralCargoApplicationTest extends AbstractIntegrationTest {
 
     @Test
     void contextLoads() {
