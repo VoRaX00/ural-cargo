@@ -25,7 +25,8 @@ spring:
     liquibase-schema: public
     database-change-log-table: ural_cargo_log
     database-change-log-lock-table: ural_cargo_lock
-    change-log: classpath:db/changelog.yaml
+    change-log: classpath:db/changelog-master.xml
+    default-schema: ural_cargo
 
 logging:
   level:
