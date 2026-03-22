@@ -11,6 +11,7 @@ import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ural.cargo.dto.CargoDto;
 import ru.ural.cargo.dto.CargoRequest;
+import ru.ural.cargo.entities.Cargo;
 import ru.ural.cargo.enums.CargoType;
 import ru.ural.dto.PageDto;
 import ru.ural.dto.PaginatedParamsDto;
@@ -65,6 +66,15 @@ public class CargoService {
                 cargoMapper.toDto(items),
                 paramsModel.getItemsOnPage()
         );
+    }
+
+    public CargoDto getById(Long id) {
+        Cargo cargo = cargoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format(
+                        "Груз с id: %d не найден", id
+                )));
+
+        return cargoMapper.toDto(cargo);
     }
 
     @Transactional

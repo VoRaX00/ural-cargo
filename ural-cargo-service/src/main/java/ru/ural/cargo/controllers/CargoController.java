@@ -33,6 +33,11 @@ public class CargoController implements CargoApi {
     }
 
     @Override
+    public ResponseEntity<CargoDto> getById(Long id) {
+        return ResponseEntity.ok(cargoService.getById(id));
+    }
+
+    @Override
     public ResponseEntity<Void> delete(Long id) {
         cargoService.delete(id);
         return ResponseEntity.ok().build();
