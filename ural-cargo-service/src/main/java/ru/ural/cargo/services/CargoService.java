@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.ural.cargo.dto.CargoDto;
 import ru.ural.cargo.dto.CargoRequest;
 import ru.ural.cargo.entities.Cargo;
-import ru.ural.cargo.enums.CargoType;
+import ru.ural.cargo.enums.CargoStatus;
 import ru.ural.dto.PageDto;
 import ru.ural.dto.PaginatedParamsDto;
 import ru.ural.enums.UserRole;
@@ -40,7 +40,7 @@ public class CargoService {
 
     public CargoDto create(@NonNull CargoRequest cargoRequest) {
         var cargo = cargoMapper.toEntity(cargoRequest);
-        cargo.setCargoType(CargoType.SEARCH);
+        cargo.setStatus(CargoStatus.SEARCH);
         cargo.setCreatedAt(ZonedDateTime.now());
 
         Authentication authentication = JwtUtils.getAuthentication();

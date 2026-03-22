@@ -63,4 +63,9 @@
         <modifyDataType tableName="cargo" columnName="unloading_place" newDataType="jsonb"/>
     </changeSet>
 
+    <changeSet id="rename columns cargo" author="kerzhakov">
+        <renameColumn tableName="cargo" oldColumnName="cargo_name" newColumnName="name"/>
+        <renameColumn tableName="cargo" oldColumnName="cargo_type" newColumnName="status"/>
+    </changeSet>
+
 </databaseChangeLog>

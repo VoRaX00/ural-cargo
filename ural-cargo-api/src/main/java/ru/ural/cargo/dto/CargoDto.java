@@ -36,7 +36,7 @@ public class CargoDto {
 
     private String comment;
 
-    private String type;
+    private String status;
 
     private ZonedDateTime createdAt;
 

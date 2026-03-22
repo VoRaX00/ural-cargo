@@ -23,7 +23,7 @@
 
     <properties>
         <java.version>21</java.version>
-        <ural-common-starter.version>1.14-SNAPSHOT</ural-common-starter.version>
+        <ural-common-starter.version>1.17-SNAPSHOT</ural-common-starter.version>
         <ural-security.version>1.9-SNAPSHOT</ural-security.version>
         <spring-boot.version>3.4.3</spring-boot.version>
         <maven.compiler.source>21</maven.compiler.source>

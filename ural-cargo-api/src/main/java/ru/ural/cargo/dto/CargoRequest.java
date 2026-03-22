@@ -16,7 +16,7 @@ public class CargoRequest {
     @NotNull
     @Schema(description = "Наименование груза")
     @Size(max = 255, min = 2, message = "Название груза должно состоять из 2 до 255 символов")
-    private String cargoName;
+    private String name;
 
     @NotNull
     @Schema(description = "Длина груза")
@@ -56,7 +56,7 @@ public class CargoRequest {
 
     @NotNull
     @Schema(description = "Тип груза")
-    private String cargoType;
+    private String status;
 
 
 }

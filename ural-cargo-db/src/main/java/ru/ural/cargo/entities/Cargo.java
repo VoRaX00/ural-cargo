@@ -8,7 +8,7 @@ import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import ru.ural.entities.BaseEntity;
-import ru.ural.cargo.enums.CargoType;
+import ru.ural.cargo.enums.CargoStatus;
 
 @Entity
 @Getter
@@ -19,7 +19,7 @@ import ru.ural.cargo.enums.CargoType;
 public class Cargo extends BaseEntity {
 
     @Column(nullable = false)
-    private String cargoName;
+    private String name;
 
     @Column(nullable = false)
     private BigDecimal length;
@@ -61,6 +61,6 @@ public class Cargo extends BaseEntity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private CargoType cargoType;
+    private CargoStatus status;
 
 }

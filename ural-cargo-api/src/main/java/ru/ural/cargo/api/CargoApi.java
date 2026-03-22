@@ -22,7 +22,7 @@ public interface CargoApi {
     ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid CargoRequest cargoRequest);
 
     @GetMapping
-    ResponseEntity<PageDto<CargoDto>> getPaginatedList(@RequestParam PaginatedParamsDto paginatedParamsDto);
+    ResponseEntity<PageDto<CargoDto>> getPaginatedList(PaginatedParamsDto paginatedParamsDto);
 
     @GetMapping("/{id}")
     ResponseEntity<CargoDto> getById(@PathVariable Long id);
