@@ -9,8 +9,8 @@ import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
+import ru.ural.cargo.dto.CargoDto;
 import ru.ural.cargo.dto.CargoRequest;
-import ru.ural.cargo.dto.CargoResponse;
 import ru.ural.cargo.enums.CargoType;
 import ru.ural.dto.PageDto;
 import ru.ural.dto.PaginatedParamsDto;
@@ -27,7 +27,7 @@ import ru.ural.utils.JwtUtils;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CargoService  {
+public class CargoService {
 
     private final CargoRepository cargoRepository;
 
@@ -37,7 +37,7 @@ public class CargoService  {
 
     private final CargoMapper cargoMapper;
 
-    public CargoResponse create(@NonNull CargoRequest cargoRequest) {
+    public CargoDto create(@NonNull CargoRequest cargoRequest) {
         var cargo = cargoMapper.toEntity(cargoRequest);
         cargo.setCargoType(CargoType.SEARCH);
         cargo.setCreatedAt(ZonedDateTime.now());
@@ -50,7 +50,7 @@ public class CargoService  {
         return cargoMapper.toDto(savedCargo);
     }
 
-    public PageDto<CargoResponse> getPage(PaginatedParamsDto paramsDto) {
+    public PageDto<CargoDto> getPage(PaginatedParamsDto paramsDto) {
         var paramsModel = paginatedMapper.toModel(paramsDto);
         var items = customCargoRepository.getItems(paramsModel);
         int totalResultCount = customCargoRepository.getTotalResultCount(paramsModel.getFilters());

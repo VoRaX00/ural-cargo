@@ -1,8 +1,8 @@
 package ru.ural.cargo.mappers;
 
 import org.mapstruct.*;
+import ru.ural.cargo.dto.CargoDto;
 import ru.ural.cargo.dto.CargoRequest;
-import ru.ural.cargo.dto.CargoResponse;
 import ru.ural.cargo.entities.Cargo;
 
 import java.util.List;
@@ -15,9 +15,9 @@ public interface CargoMapper {
 
     @Mapping(target = "name", source = "cargoName")
     @Mapping(target = "type", source = "cargoType")
-    CargoResponse toDto(Cargo cargo);
+    CargoDto toDto(Cargo cargo);
 
-    List<CargoResponse> toDto(List<Cargo> cargos);
+    List<CargoDto> toDto(List<Cargo> cargos);
 
     @Mapping(target = "cargoType", expression = "java(CargoType.valueOf(request.getCargoType()))")
     Cargo toEntity(CargoRequest request);

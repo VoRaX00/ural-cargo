@@ -4,8 +4,8 @@ import lombok.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import ru.ural.cargo.api.CargoApi;
+import ru.ural.cargo.dto.CargoDto;
 import ru.ural.cargo.dto.CargoRequest;
-import ru.ural.cargo.dto.CargoResponse;
 import ru.ural.cargo.services.CargoService;
 import ru.ural.dto.PageDto;
 import ru.ural.dto.PaginatedParamsDto;
@@ -17,7 +17,7 @@ public class CargoController implements CargoApi {
     private final CargoService cargoService;
 
     @Override
-    public ResponseEntity<CargoResponse> create(CargoRequest cargoRequest) {
+    public ResponseEntity<CargoDto> create(CargoRequest cargoRequest) {
         return new ResponseEntity<>(cargoService.create(cargoRequest), HttpStatus.CREATED);
     }
 
@@ -28,7 +28,7 @@ public class CargoController implements CargoApi {
     }
 
     @Override
-    public ResponseEntity<PageDto<CargoResponse>> getPaginatedList(PaginatedParamsDto paramsDto) {
+    public ResponseEntity<PageDto<CargoDto>> getPaginatedList(PaginatedParamsDto paramsDto) {
         return ResponseEntity.ok(cargoService.getPage(paramsDto));
     }
 

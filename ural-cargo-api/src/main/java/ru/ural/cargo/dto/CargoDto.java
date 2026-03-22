@@ -10,11 +10,11 @@ import ru.ural.dto.AddressDto;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class CargoResponse {
+public class CargoDto {
 
     private Long id;
 
-    private Long userId;
+    private String userUuid;
 
     private String name;
 
