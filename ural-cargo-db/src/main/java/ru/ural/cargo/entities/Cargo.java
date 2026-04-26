@@ -2,6 +2,7 @@ package ru.ural.cargo.entities;
 
 import java.math.*;
 import java.time.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -65,6 +66,6 @@ public class Cargo extends BaseEntity {
     private CargoStatus status;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private List<Long> fileIds;
+    private List<Long> fileIds = new ArrayList<>();
 
 }
