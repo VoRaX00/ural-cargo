@@ -68,4 +68,10 @@
         <renameColumn tableName="cargo" oldColumnName="cargo_type" newColumnName="status"/>
     </changeSet>
 
+    <changeSet id="add column filesIds for cargo" author="kerzhakov">
+        <addColumn tableName="cargo">
+            <column name="file_ids" type="JSONB"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

@@ -1,6 +1,7 @@
 package ru.ural.cargo.dto;
 
 import java.math.*;
+import java.util.List;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
@@ -57,6 +58,10 @@ public class CargoRequest {
     @NotNull
     @Schema(description = "Тип груза")
     private String status;
+
+    @NotEmpty
+    @Schema(description = "Id файлов груза")
+    private List<Long> fileIds;
 
 
 }

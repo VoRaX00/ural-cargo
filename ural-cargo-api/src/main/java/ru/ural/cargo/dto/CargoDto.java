@@ -2,6 +2,7 @@ package ru.ural.cargo.dto;
 
 import java.math.*;
 import java.time.*;
+import java.util.List;
 
 import lombok.*;
 import ru.ural.dto.AddressDto;
@@ -41,5 +42,7 @@ public class CargoDto {
     private ZonedDateTime createdAt;
 
     private ZonedDateTime updatedAt;
+
+    private List<Long> fileIds;
 
 }
