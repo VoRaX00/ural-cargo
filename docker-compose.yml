@@ -11,6 +11,17 @@ services:
     ports:
       - 10900:5432
 
+  minio:
+    image: 'minio/minio:latest'
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=ural
+      - MINIO_ROOT_PASSWORD=uralpass
+    command: server ~/data --console-address :9090
+    ports:
+      - 9090:9090
+      - 9000:9000
+
   cars:
     image: kerzhakovn/ural-cars-service
     platform: linux/amd64
