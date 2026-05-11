@@ -45,4 +45,10 @@ public class CargoDto {
 
     private List<Long> fileIds;
 
+    private List<String> bodyTypes;
+
+    private List<String> loadingTypes;
+
+    private List<String> unloadingTypes;
+
 }

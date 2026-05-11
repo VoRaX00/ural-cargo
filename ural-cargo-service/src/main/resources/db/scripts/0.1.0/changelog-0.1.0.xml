@@ -74,4 +74,18 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="add column body types, loading and unloading types" author="kerzhakov">
+        <addColumn tableName="cargo">
+            <column name="body_types" type="jsonb" defaultValueComputed="'[]'::jsonb">
+                <constraints nullable="false"/>
+            </column>
+            <column name="loading_types" type="jsonb" defaultValueComputed="'[]'::jsonb">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unloading_types" type="jsonb" defaultValueComputed="'[]'::jsonb">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

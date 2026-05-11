@@ -55,13 +55,20 @@ public class CargoRequest {
     @Schema(description = "Комментарий")
     private String comment;
 
-    @NotNull
-    @Schema(description = "Тип груза")
-    private String status;
-
     @NotEmpty
     @Schema(description = "Id файлов груза")
     private List<Long> fileIds;
 
+    @NotEmpty
+    @Schema(description = "Подходящие типы кузова")
+    private List<@NotBlank String> bodyTypes;
+
+    @NotEmpty
+    @Schema(description = "Подходящие типы загрузки")
+    private List<@NotBlank String> loadingTypes;
+
+    @NotEmpty
+    @Schema(description = "Подходящие типы разгрузки")
+    private List<@NotBlank String> unloadingTypes;
 
 }

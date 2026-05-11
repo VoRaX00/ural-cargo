@@ -9,6 +9,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import ru.ural.cargo.enums.BodyType;
+import ru.ural.cargo.enums.LoadingType;
 import ru.ural.entities.BaseEntity;
 import ru.ural.cargo.enums.CargoStatus;
 
@@ -65,7 +67,24 @@ public class Cargo extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CargoStatus status;
 
+    @Builder.Default
+    @Column(nullable = false)
     @JdbcTypeCode(SqlTypes.JSON)
     private List<Long> fileIds = new ArrayList<>();
+
+    @Builder.Default
+    @Column(nullable = false)
+    @JdbcTypeCode(SqlTypes.JSON)
+    private List<BodyType> bodyTypes = new ArrayList<>();
+
+    @Builder.Default
+    @Column(nullable = false)
+    @JdbcTypeCode(SqlTypes.JSON)
+    private List<LoadingType> loadingTypes = new ArrayList<>();
+
+    @Builder.Default
+    @Column(nullable = false)
+    @JdbcTypeCode(SqlTypes.JSON)
+    private List<LoadingType> unloadingTypes = new ArrayList<>();
 
 }
